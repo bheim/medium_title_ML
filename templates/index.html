@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form">
+        <input name="title" type="text" placeholder="Name of Medium Article">
+        <button type="submit">Submit</button>
+        <p></p>
+    </form>
+    <script>
+        const formEl = document.querySelector('.form');
+
+        formEl.addEventListener('submit', event => {
+            event.preventDefault();
+
+            const formData = new FormData(formEl);
+            const data = Object.fromEntries(formData);
+
+            fetch('http://localhost:5000/title', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify(data)
+
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('p').innerHTML =  data.MediumClaps;
+        })
+    });
+    </script>
+
+</body>
+</html>
