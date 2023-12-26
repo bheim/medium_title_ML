@@ -17,6 +17,11 @@ with open('mt_predict.pkl', 'rb') as file:
 corpus = api.load('text8')
 model = Word2Vec(corpus)
 
+def app():
+    app = Flask(__name__)
+    return app
+
+
 vocab = list(model.wv.index_to_key)
 def vectorize_title(title, model):
     words = title.split()  # Split title into words
@@ -39,8 +44,6 @@ def test_title(title):
     new_features = np.asarray(new_features)
     predicted_claps = mt_predict.predict(new_features)
     return predicted_claps
-
-app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
