@@ -53,3 +53,6 @@ def title():
         title = request.json['title'] 
         clap_count = str(test_title(title))
         return jsonify(MediumClaps=clap_count)
+
+if __name__ == '__main__':
+    app.run(debug=True)
